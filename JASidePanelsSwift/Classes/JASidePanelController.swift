@@ -20,7 +20,7 @@ enum JASidePanelState : Int {
 }
 
 
-public class JASidePanelController: UIViewController,UIGestureRecognizerDelegate {
+open class JASidePanelController: UIViewController,UIGestureRecognizerDelegate {
     let ja_kvoContext : UnsafeMutableRawPointer? = nil
     
     
