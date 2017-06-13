@@ -347,7 +347,6 @@ open class JASidePanelController: UIViewController,UIGestureRecognizerDelegate {
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self._baseInit()
-        fatalError("")
     }
     
     func _baseInit(){
@@ -372,7 +371,7 @@ open class JASidePanelController: UIViewController,UIGestureRecognizerDelegate {
     
     
     
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         self.view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         self.centerPanelContainer = UIView(frame: self.view.bounds)
@@ -392,7 +391,7 @@ open class JASidePanelController: UIViewController,UIGestureRecognizerDelegate {
     }
     
     
-    override public func viewWillAppear(_ animated: Bool) {
+    override open func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         // ensure correct view dimensions
         self._layoutSideContainers(animate: false, duration: 0.0)
@@ -401,7 +400,7 @@ open class JASidePanelController: UIViewController,UIGestureRecognizerDelegate {
         self.styleContainer(container: self.centerPanelContainer, animate: false, duration: 0.0)
     }
     
-    override public func viewDidAppear(_ animated: Bool) {
+    override open func viewDidAppear(_ animated: Bool) {
         let _ = self._adjustCenterFrame()
         super.viewDidAppear(animated)
         
@@ -411,7 +410,7 @@ open class JASidePanelController: UIViewController,UIGestureRecognizerDelegate {
     
     
     
-    override public func willAnimateRotation(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
+    override open func willAnimateRotation(to toInterfaceOrientation: UIInterfaceOrientation, duration: TimeInterval) {
         self.centerPanelContainer.frame = self._adjustCenterFrame()
         self._layoutSideContainers(animate: true, duration: duration)
         self._layoutSidePanels()
@@ -992,7 +991,7 @@ open class JASidePanelController: UIViewController,UIGestureRecognizerDelegate {
     
     // MARK: - Key Value Observing
     
-    override public func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+    override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if context == ja_kvoContext {
             if (keyPath == "view") {
                 if self.centerPanel.isViewLoaded && self.recognizesPanGesture {
@@ -1014,7 +1013,7 @@ open class JASidePanelController: UIViewController,UIGestureRecognizerDelegate {
      return [[UIBarButtonItem alloc] initWithImage:[[self class] defaultImage] style:UIBarButtonItemStylePlain target:self action:@selector(toggleLeftPanel:)];
      }*/
     
-    func leftButtonForCenterPanel() -> UIBarButtonItem {
+    open func leftButtonForCenterPanel() -> UIBarButtonItem {
         return UIBarButtonItem(image: JASidePanelController.defaultImage(), style: .plain, target: self, action: #selector(self.toggleLeftPanel))
     }
     
@@ -1048,7 +1047,7 @@ open class JASidePanelController: UIViewController,UIGestureRecognizerDelegate {
         self._showCenterPanel(animated: animated, bounce: false)
     }
     
-    func toggleLeftPanel(sender: AnyObject) {
+    public func toggleLeftPanel(sender: AnyObject) {
         if self.state == .JASidePanelLeftVisible {
             self._showCenterPanel(animated: true, bounce: false)
         }
@@ -1110,7 +1109,7 @@ open class JASidePanelController: UIViewController,UIGestureRecognizerDelegate {
     
     
     
-    override public func didReceiveMemoryWarning() {
+    override open func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
